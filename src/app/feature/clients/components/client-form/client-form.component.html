@@ -1,0 +1,82 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Editar Cliente' : 'Novo Cliente' }}</h2>
+<mat-dialog-content class="form-content">
+  <form [formGroup]="form" (ngSubmit)="save()" class="form-grid">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nome Completo</mat-label>
+      <input matInput formControlName="fullName" placeholder="Ex: João Sambo">
+      <mat-error *ngIf="form.get('fullName')?.hasError('required')">
+        Campo obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo DOC</mat-label>
+        <mat-select formControlName="documentType">
+          <mat-option value="BI">BI</mat-option>
+          <mat-option value="NUIT">NUIT</mat-option>
+          <mat-option value="Carta de Condução">Carta de Condução</mat-option>
+          <mat-option value="Passaporte">Passaporte</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="flex-grow">
+        <mat-label>Número Documento</mat-label>
+        <input matInput formControlName="documentNumber">
+        <mat-error *ngIf="form.get('documentNumber')?.hasError('required')">
+          Campo obrigatório
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Telefone</mat-label>
+      <input matInput formControlName="phoneNumber" placeholder=" 844 939 001">
+      <mat-error *ngIf="form.get('phoneNumber')?.hasError('required')">
+        Campo obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    
+    <h3 class="form-section-title">Endereço</h3>
+    
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Localidade</mat-label>
+        <input matInput formControlName="localidade" placeholder="Ex: Macia">
+        <mat-error *ngIf="form.get('localidade')?.hasError('required')">Obrigatório</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Bairro</mat-label>
+        <input matInput formControlName="bairro" placeholder="Ex: Central">
+        <mat-error *ngIf="form.get('bairro')?.hasError('required')">Obrigatório</mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Rua / Avenida</mat-label>
+      <input matInput formControlName="rua" placeholder="Ex: Av. 24 de Julho">
+      <mat-error *ngIf="form.get('rua')?.hasError('required')">Obrigatório</mat-error>
+    </mat-form-field>
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Nº Casa</mat-label>
+        <input matInput formControlName="numeroCasa" placeholder="Ex: 104">
+      </mat-form-field>
+      
+      <mat-form-field appearance="outline" class="flex-grow">
+        <mat-label>Ponto de Referência</mat-label>
+        <input matInput formControlName="referencia" placeholder="Ex: Próximo à padaria">
+      </mat-form-field>
+    </div>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Cancelar</button>
+  <button mat-flat-button color="primary" (click)="save()" [disabled]="form.invalid || isSaving">
+    {{ isSaving ? 'Salvando...' : 'Salvar' }}
+  </button>
+</mat-dialog-actions>

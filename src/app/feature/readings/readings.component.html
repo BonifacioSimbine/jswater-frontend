@@ -1,0 +1,138 @@
+<section class="page-root">
+  <mat-card class="page-card">
+    <header class="page-header">
+      <div>
+        <h1>Leituras</h1>
+        <p>Registo de leituras mensais de consumo.</p>
+      </div>
+      <button mat-flat-button color="primary" (click)="formPanelOpen = !formPanelOpen">
+        <mat-icon>{{ formPanelOpen ? 'close' : 'add' }}</mat-icon>
+        Nova Leitura
+      </button>
+    </header>
+
+    <div *ngIf="successMessage" class="msg success">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <mat-icon>check_circle</mat-icon>
+        <span>{{ successMessage }}</span>
+      </div>
+      
+      <button *ngIf="generatedInvoice" mat-raised-button color="primary" 
+              style="margin-left: auto;" (click)="openInvoice()">
+        <mat-icon>receipt_long</mat-icon>
+        VER / PAGAR FATURA
+      </button>
+    </div>
+
+    <div *ngIf="errorMessage" class="msg error" style="margin-bottom: 1rem; padding: 1rem; background: #ffebee; border-radius: 4px; display: flex; align-items: center; gap: 0.5rem; color: #c62828;">
+      <mat-icon>error</mat-icon>
+      {{ errorMessage }}
+    </div>
+
+    <!-- Form Panel -->
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="formPanelOpen" (opened)="formPanelOpen = true" (closed)="formPanelOpen = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Registar Leitura Mensal</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <form [formGroup]="form" class="app-form" style="padding-top: 1rem;">
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <mat-form-field appearance="outline" style="flex: 2; min-width: 250px;">
+              <mat-label>Pesquisar Contador</mat-label>
+              <input type="text"
+                     placeholder="Digite o serial..."
+                     matInput
+                     [formControl]="meterSearchControl"
+                     [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="selectMeter($event.option.value)">
+                <mat-option *ngFor="let m of meters" [value]="m">
+                  {{ m.serialNumber }} <small>({{ m.clientName || 'Cliente' }})</small>
+                </mat-option>
+              </mat-autocomplete>
+              <mat-error *ngIf="form.get('meterId')?.invalid">Contador obrigatório</mat-error>
+            </mat-form-field>
+  
+            <mat-form-field appearance="outline" style="flex: 1; min-width: 150px;">
+              <mat-label>Leitura Atual (m³)</mat-label>
+              <input matInput type="number" formControlName="value" placeholder="0">
+              <mat-error *ngIf="form.get('value')?.invalid">Valor inválido</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-actions" style="display: flex; justify-content: flex-end;">
+            <button mat-flat-button color="primary" (click)="register()" [disabled]="form.invalid">
+              <mat-icon>save</mat-icon>
+              Registar
+            </button>
+          </div>
+        </form>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <!-- Table -->
+    <div class="table-container" style="margin-top: 1.5rem;">
+      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+        <mat-form-field appearance="outline" style="min-width: 220px;">
+          <mat-label>Pesquisar por Nome</mat-label>
+          <input matInput [formControl]="nameSearchControl" placeholder="Digite o nome do cliente...">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+      <table mat-table [dataSource]="filteredReadings" class="mat-elevation-z0" style="width: 100%; border: 1px solid #e0e0e0; border-radius: 4px;">
+        <!-- Client Name Column -->
+        <ng-container matColumnDef="clientName">
+          <th mat-header-cell *matHeaderCellDef> Nome </th>
+          <td mat-cell *matCellDef="let element"> {{element.clientName || '---'}} </td>
+        </ng-container>
+
+        <!-- Date Column -->
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef> Data </th>
+          <td mat-cell *matCellDef="let element"> {{element.readingDate | date:'dd/MM/yyyy HH:mm'}} </td>
+        </ng-container>
+
+        <!-- Meter Column -->
+        <ng-container matColumnDef="meter">
+          <th mat-header-cell *matHeaderCellDef> Contador </th>
+          <td mat-cell *matCellDef="let element"> {{element.meterSerialNumber || element.meterId}} </td>
+        </ng-container>
+
+        <!-- Value Column -->
+        <ng-container matColumnDef="value">
+          <th mat-header-cell *matHeaderCellDef> Consumo (m³) </th>
+          <td mat-cell *matCellDef="let element"> 
+            <strong>{{element.consumption || element.readingValue || element.value || 0}}</strong>
+          </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Ações </th>
+          <td mat-cell *matCellDef="let element" style="display: flex; gap: 0.5rem; align-items: center;">
+            <button mat-icon-button color="primary" (click)="assignFine(element)" title="Atribuir Multa">
+              <mat-icon>gavel</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteReading(element)" title="Apagar Leitura">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [length]="totalElements"
+                     [pageSize]="pageSize"
+                     [pageSizeOptions]="[10, 20]"
+                     (page)="onPageChange($event)">
+      </mat-paginator>
+
+      <div *ngIf="readings.length === 0" class="empty-state" style="padding: 2rem; text-align: center; color: #666;">
+        Nenhuma leitura registada.
+      </div>
+    </div>
+
+  </mat-card>
+</section>

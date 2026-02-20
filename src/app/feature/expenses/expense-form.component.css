@@ -1,0 +1,33 @@
+.expense-form-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  background: transparent;
+}
+.expense-form-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px #0002;
+  padding: 2.2rem 2.5rem 2.5rem 2.5rem;
+  min-width: 340px;
+  max-width: 400px;
+  width: 100%;
+}
+.expense-form-title {
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin: 0 0 18px 0;
+  letter-spacing: -1px;
+  text-align: center;
+}
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}

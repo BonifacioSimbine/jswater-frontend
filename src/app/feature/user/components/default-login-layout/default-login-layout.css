@@ -1,0 +1,127 @@
+.login-shell {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f3f4f6;
+  padding: 24px;
+}
+
+/* Wrapper */
+.login-wrapper {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  max-width: 900px;
+  width: 100%;
+  padding: 0 !important;
+  border-radius: 16px !important;
+  overflow: hidden;
+}
+
+/* SIDE PANEL */
+.login-side {
+  background: linear-gradient(135deg, #0a2a43, #0d3b66);
+  color: #ffffff;
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+.side-logo {
+  height: 56px;
+  width: fit-content;
+}
+
+.side-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.side-description {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+.side-highlight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.side-highlight mat-icon {
+  font-size: 18px;
+}
+
+/* LOGIN */
+.login-content {
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.login-brand .side-logo {
+  height: 40px;
+}
+
+.login-brand .side-title {
+  font-size: 1.25rem;
+}
+
+.login-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.login-header p {
+  color: #6b7280;
+  margin-bottom: 24px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.login-button {
+  height: 48px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.login-footer {
+  margin-top: 32px;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  text-align: center;
+}
+
+.login-error {
+  margin-top: 16px;
+  color: #b91c1c;
+  font-size: 0.85rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .login-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .login-side {
+    display: none;
+  }
+}

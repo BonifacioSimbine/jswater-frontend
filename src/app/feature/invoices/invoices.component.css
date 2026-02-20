@@ -1,0 +1,115 @@
+.page-root {
+  padding: 16px 0;
+}
+
+.page-card {
+  padding: 24px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.page-header h1 {
+  margin: 0 0 4px;
+}
+
+.page-header p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.data-table {
+  width: 100%;
+}
+
+/* SEARCH & FILTERS */
+.search-container {
+  background: white;
+}
+
+.filters-row {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem; /* Less padding */
+    background: #fafafa;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    align-items: center; /* Center items vertically */
+}
+
+/* Compact specific form fields in the filters row */
+.compact-field {
+    font-size: 12px;
+}
+
+.compact-field .mat-mdc-text-field-wrapper {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    height: 36px !important;
+}
+
+.compact-field .mat-mdc-form-field-flex {
+    height: 36px !important;
+    align-items: center !important;
+}
+
+.compact-field .mat-mdc-form-field-infix {
+    padding-top: 8px !important;
+    padding-bottom: 0 !important;
+    min-height: 36px !important;
+}
+
+/* Force height reduction if needed, though subscriptSizing="dynamic" helps */
+.filters-row mat-form-field .mat-mdc-text-field-wrapper {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 40px; /* Reduced height */
+}
+
+.filters-row mat-form-field .mat-mdc-form-field-flex {
+    height: 40px;
+    align-items: center;
+}
+
+/* STATUS BADGES */
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 16px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
+.status-paid {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
+
+.status-pending {
+    background-color: #fff3e0;
+    color: #e65100;
+    border: 1px solid #ffe0b2;
+}
+
+.status-overdue {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+}
+
+.table-container {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+tr.mat-mdc-row:hover {
+    background-color: #f5f5f5;
+}
+

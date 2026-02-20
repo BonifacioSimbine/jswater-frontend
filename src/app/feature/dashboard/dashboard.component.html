@@ -1,0 +1,120 @@
+<section class="page-root">
+  <mat-card class="page-card">
+    <header class="page-header">
+      <div>
+        <h1>Visão Geral e KPIs</h1>
+        <p>Monitorização da operação e receita.</p>
+      </div>
+      
+      <div class="header-actions">
+        <mat-form-field appearance="outline" class="month-picker">
+          <mat-label>Mês de Referência</mat-label>
+          <input matInput type="month" [(ngModel)]="selectedMonth" (ngModelChange)="loadDashboard()">
+        </mat-form-field>
+        <button mat-icon-button (click)="loadDashboard()"><mat-icon>refresh</mat-icon></button>
+      </div>
+    </header>
+
+    <!-- Hero central com estado da aplicação -->
+    <section class="dashboard-hero">
+      <div class="dashboard-hero-text">
+        <h2>Água sob controlo, faturação sem stress.</h2>
+        <p>
+          Acompanhe clientes, leituras e cobranças em tempo real a partir de um único painel.
+        </p>
+      </div>
+      <div class="dashboard-hero-status">
+        <span class="status-dot"></span>
+        <span class="status-label">Sistema operacional</span>
+        <span class="status-sub">Todos os serviços a funcionar normalmente.</span>
+      </div>
+    </section>
+
+    <div class="dashboard-content" *ngIf="data; else loading">
+      
+      <!-- KPI Cards -->
+      <div class="kpi-grid">
+                <div class="kpi-card success">
+                  <mat-icon class="icon-bg">account_balance_wallet</mat-icon>
+                  <div class="value">{{ netBalance | number:'1.2-2' }} MT</div>
+                  <div class="label">Saldo Líquido</div>
+                  <small>Receita - Despesas</small>
+                </div>
+        <div class="kpi-card">
+          <mat-icon class="icon-bg">people</mat-icon>
+          <div class="value">{{ data.totalActiveClients }}</div>
+          <div class="label">Clientes Ativos</div>
+        </div>
+
+        <div class="kpi-card">
+          <mat-icon class="icon-bg">water_damage</mat-icon>
+          <div class="value">{{ data.totalMeters }}</div>
+          <div class="label">Contadores</div>
+        </div>
+
+        <div class="kpi-card warning">
+          <mat-icon class="icon-bg">pending_actions</mat-icon>
+          <div class="value">{{ data.totalPendingInvoices }}</div>
+          <div class="label">Faturas Pendentes</div>
+        </div>
+
+        <div class="kpi-card info">
+          <mat-icon class="icon-bg">attach_money</mat-icon>
+          <div class="value">{{ data.collectedRevenue | number:'1.2-2' }} MT</div>
+          <div class="label">Receita Cobrada</div>
+          <small>Esp.: {{ data.expectedRevenue | number:'1.2-2' }} MT</small>
+        </div>
+
+        <div class="kpi-card error">
+          <mat-icon class="icon-bg">money_off</mat-icon>
+          <div class="value">{{ data.totalDebt | number:'1.2-2' }} MT</div>
+          <div class="label">Dívida Total</div>
+        </div>
+      </div>
+
+      <!-- Tables Grid -->
+      <div class="tables-grid">
+        <!-- Top Debtors -->
+        <div class="table-container">
+          <h3>Top Devedores</h3>
+          <table mat-table [dataSource]="data.topDebtors" class="simple-table">
+            <ng-container matColumnDef="client">
+              <th mat-header-cell *matHeaderCellDef> Cliente </th>
+              <td mat-cell *matCellDef="let d"> {{ d.clientName }} </td>
+            </ng-container>
+            <ng-container matColumnDef="debt">
+              <th mat-header-cell *matHeaderCellDef> Dívida </th>
+              <td mat-cell *matCellDef="let d"> {{ d.totalDebt | number:'1.2-2' }} MT </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsDebtors"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsDebtors"></tr>
+          </table>
+        </div>
+
+        <!-- Debt By Zone -->
+        <div class="table-container">
+          <h3>Dívida por Zona</h3>
+          <table mat-table [dataSource]="data.debtByZone" class="simple-table">
+            <ng-container matColumnDef="zone">
+              <th mat-header-cell *matHeaderCellDef> Zona </th>
+              <td mat-cell *matCellDef="let z"> {{ z.zone }} </td>
+            </ng-container>
+            <ng-container matColumnDef="debt">
+              <th mat-header-cell *matHeaderCellDef> Total </th>
+              <td mat-cell *matCellDef="let z"> {{ z.totalDebt | number:'1.2-2' }} MT </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsZone"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsZone"></tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <ng-template #loading>
+      <div class="loading-state">
+        <p>A carregar dados do dashboard...</p>
+      </div>
+    </ng-template>
+  </mat-card>
+</section>

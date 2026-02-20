@@ -1,0 +1,61 @@
+/* Paginação */
+.expenses-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.pagination-info {
+  font-weight: 500;
+  font-size: 1.08rem;
+}
+.expenses-card {
+  max-width: 700px;
+  margin: 2.5rem auto;
+  padding: 2.2rem 2.5rem 2.5rem 2.5rem;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px #0001;
+  background: #fff;
+}
+.expenses-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+.expenses-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -1px;
+}
+.expenses-header button {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.expenses-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fafbfc;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px #0001;
+}
+.expenses-table th, .expenses-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.expenses-table th {
+  text-align: left;
+  font-weight: 600;
+  background: #f6f7fa;
+  font-size: 1.08rem;
+}
+.expenses-table tr:last-child td {
+  border-bottom: none;
+}
+.expenses-table td {
+  font-size: 1.05rem;
+}

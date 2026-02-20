@@ -1,0 +1,141 @@
+<section class="page-root">
+  <mat-card class="page-card">
+    <header class="page-header">
+      <div>
+        <h1>Ajustes do Sistema</h1>
+        <p>Gerencie tarifas, segurança e visualize informações sobre o sistema.</p>
+      </div>
+    </header>
+
+   
+    <div *ngIf="successMessage" class="msg success">
+      <mat-icon>check_circle</mat-icon>
+      {{ successMessage }}
+    </div>
+
+    <div *ngIf="errorMessage" class="msg error">
+      <mat-icon>error</mat-icon>
+      {{ errorMessage }}
+    </div>
+
+    <mat-tab-group>
+      
+     
+      <mat-tab label="Operacional & Tarifas" style="margin-top:20px;">
+        <div class="tab-content">
+          <div class="content-grid">
+   
+            <div class="form-section">
+              <h3>Definir Novo Preço</h3>
+              <p class="helper-text">Isso atualizará o custo do m³ para faturas futuras.</p>
+              
+              <form [formGroup]="tariffForm" class="app-form">
+                <mat-form-field appearance="outline">
+                  <mat-label>Preço (MT/m³)</mat-label>
+                  <input matInput type="number" formControlName="price">
+                  <span matSuffix style="margin-right: 8px">MT</span>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Válido a partir de (Mês)</mat-label>
+                  <input matInput type="month" formControlName="validFrom">
+                </mat-form-field>
+
+                <button mat-flat-button color="primary" (click)="createTariff()" [disabled]="tariffForm.invalid">
+                  <mat-icon>save</mat-icon>
+                  Atualizar Tarifa
+                </button>
+              </form>
+            </div>
+
+       
+            <div class="list-section">
+              <h3>Histórico de Preços</h3>
+              <mat-list>
+                <mat-list-item *ngFor="let t of tariffs">
+                  <mat-icon matListItemIcon>price_change</mat-icon>
+                  <div matListItemTitle>{{ t.pricePerCubicMeter | number:'1.2-2' }} MT</div>
+                  <div matListItemLine>Data Efetiva: {{ t.validFrom }}</div>
+                  
+               
+                  <div matListItemMeta class="meta-container" *ngIf="!t.validTo">
+                    <span class="active-badge">ATIVO</span>
+                    <button mat-icon-button color="warn" (click)="deactivate(t)" matTooltip="Desativar Tarifa">
+                      <mat-icon>block</mat-icon>
+                    </button>
+                  </div>
+                  
+         
+                  <div matListItemMeta *ngIf="t.validTo">
+                    <span class="inactive-text">Até {{ t.validTo }}</span>
+                  </div>
+
+                </mat-list-item>
+                <mat-list-item *ngIf="tariffs.length === 0">
+                  <div matListItemTitle>Nenhum histórico encontrado.</div>
+                </mat-list-item>
+              </mat-list>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+
+      
+      <mat-tab label="Segurança da Conta">
+        <div class="tab-content narrow-tab">
+          <h3>Alterar Senha</h3>
+          <p class="helper-text">Recomendamos usar uma senha forte com pelo menos 6 caracteres.</p>
+
+          <form [formGroup]="passwordForm" class="app-form">
+            <mat-form-field appearance="outline">
+              <mat-label>Senha Atual</mat-label>
+              <input matInput type="password" formControlName="currentPassword">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Nova Senha</mat-label>
+              <input matInput type="password" formControlName="newPassword">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Confirmar Nova Senha</mat-label>
+              <input matInput type="password" formControlName="confirmPassword">
+            </mat-form-field>
+
+            <div class="actions">
+              <button mat-flat-button color="warn" (click)="changePassword()" [disabled]="passwordForm.invalid">
+                <mat-icon>lock_reset</mat-icon>
+                Alterar Senha
+              </button>
+            </div>
+          </form>
+        </div>
+      </mat-tab>
+
+      <!-- TAB 3: SOBRE -->
+      <mat-tab label="Sobre o Sistema">
+        <div class="tab-content narrow-tab system-info">
+          <div class="logo-area">
+            <mat-icon style="font-size: 64px; height: 64px; width: 64px; color: #2196f3;">water_drop</mat-icon>
+            <h2>JsWater Management</h2>
+            <p>Versão 1.0.2-beta</p>
+          </div>
+          
+          <mat-list>
+            <mat-list-item>
+              <mat-icon matListItemIcon>business</mat-icon>
+              <div matListItemTitle>Empresa Licenciada</div>
+              <div matListItemLine>Kivora Solutions</div>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon matListItemIcon>support</mat-icon>
+              <div matListItemTitle>Suporte Técnico</div>
+              <div matListItemLine>bonifaciovsimbine@gmail.com | +258 84 493 9001</div>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-tab>
+
+    </mat-tab-group>
+  </mat-card>
+</section>

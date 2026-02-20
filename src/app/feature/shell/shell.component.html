@@ -1,0 +1,127 @@
+<div class="shell-root">
+
+  <mat-toolbar class="shell-toolbar">
+    <div class="toolbar-inner">
+      <div class="brand">
+        <img src="/jswater-logo.svg" alt="JsWater" />
+        <span class="brand-name">JsWater</span>
+      </div>
+
+      <div class="nav-pill-wrapper">
+        <nav class="nav-pills">
+          <button mat-button class="nav-pill" routerLink="/app/dashboard" routerLinkActive="nav-pill-active">
+            <mat-icon>dashboard</mat-icon>
+            <span>Dashboard</span>
+          </button>
+          <button mat-button class="nav-pill" routerLink="/app/clients" routerLinkActive="nav-pill-active">
+            <mat-icon>people</mat-icon>
+            <span>Clientes</span>
+          </button>
+          <button mat-button class="nav-pill" routerLink="/app/meters" routerLinkActive="nav-pill-active">
+            <mat-icon>speed</mat-icon>
+            <span>Contadores</span>
+          </button>
+          <button mat-button class="nav-pill" routerLink="/app/readings" routerLinkActive="nav-pill-active">
+            <mat-icon>show_chart</mat-icon>
+            <span>Leituras</span>
+          </button>
+          <button mat-button class="nav-pill" routerLink="/app/invoices" routerLinkActive="nav-pill-active">
+            <mat-icon>receipt_long</mat-icon>
+            <span>Faturas</span>
+          </button>
+          <div class="nav-pill nav-pill-dropdown" style="position: relative;">
+            <button mat-button class="nav-pill" [matMenuTriggerFor]="reportsMenu">
+              <mat-icon>assessment</mat-icon>
+              <span>Relatórios</span>
+              <mat-icon style="font-size: 16px; margin-left: 2px;">expand_more</mat-icon>
+            </button>
+            <mat-menu #reportsMenu="matMenu">
+              <button mat-menu-item routerLink="/app/reports" routerLinkActive="nav-pill-active">
+                <mat-icon>table_view</mat-icon>
+                <span>Relatórios Operacionais</span>
+              </button>
+              <button mat-menu-item routerLink="/app/relatorio-financeiro" routerLinkActive="nav-pill-active">
+                <mat-icon>account_balance</mat-icon>
+                <span>Relatório Financeiro</span>
+              </button>
+              <button mat-menu-item routerLink="/app/despesas" routerLinkActive="nav-pill-active">
+                <mat-icon>money_off</mat-icon>
+                <span>Despesas</span>
+              </button>
+            </mat-menu>
+          </div>
+          <button mat-button class="nav-pill" routerLink="/app/settings" routerLinkActive="nav-pill-active">
+            <mat-icon>settings</mat-icon>
+            <span>Ajustes</span>
+          </button>
+        </nav>
+      </div>
+
+      <div class="shell-right">
+        <div class="notification-wrapper">
+          <button
+            mat-icon-button
+            class="icon-button"
+            [matBadge]="unreadCount"
+            matBadgeColor="warn"
+            matBadgeHidden="unreadCount === 0"
+            aria-label="Notificações"
+            (click)="togglePanel()"
+          >
+            <mat-icon>notifications_none</mat-icon>
+          </button>
+
+          <div class="notification-panel" *ngIf="isPanelOpen">
+            <div class="notification-panel-header">
+              <span>Notificações</span>
+              <button
+                mat-button
+                class="mark-all"
+                (click)="markAllAsRead()"
+                [disabled]="unreadCount === 0"
+              >
+                Marcar todas como lidas
+              </button>
+            </div>
+
+            <div class="notification-list" *ngIf="notifications.length; else noNotifications">
+              <button
+                mat-button
+                class="notification-item"
+                *ngFor="let n of notifications"
+                (click)="markAsRead(n)"
+              >
+                <div class="notification-item-main">
+                  <span class="notification-title">{{ n.title }}</span>
+                  <span class="notification-message">{{ n.message }}</span>
+                </div>
+                <span
+                  class="notification-dot"
+                  *ngIf="n.status === 'UNREAD'"
+                  aria-hidden="true"
+                ></span>
+              </button>
+            </div>
+
+            <ng-template #noNotifications>
+              <div class="notification-empty">Sem notificações.</div>
+            </ng-template>
+          </div>
+        </div>
+
+        <div class="user-info">
+          <div class="user-text">
+            <span class="user-name">Joao Sambo</span>
+            <span class="user-location">Macia, MZ</span>
+          </div>
+          <div class="user-avatar">JS</div>
+        </div>
+      </div>
+    </div>
+  </mat-toolbar>
+
+  <main class="shell-content">
+    <router-outlet></router-outlet>
+  </main>
+
+</div>

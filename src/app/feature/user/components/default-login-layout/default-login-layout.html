@@ -1,0 +1,83 @@
+<section class="login-shell">
+
+  <mat-card class="login-wrapper">
+
+    
+    <aside class="login-side">
+      <img src="/jswater-logo.svg" alt="JsWater" class="side-logo" />
+
+      <h2 class="side-title">
+        Gestão Inteligente de Água
+      </h2>
+
+      <p class="side-description">
+        Plataforma integrada para gestão de clientes, controlo de consumo,
+        registo de leituras e faturação de água.
+      </p>
+
+      <div class="side-highlight">
+        <mat-icon>verified</mat-icon>
+        <span>Sistema institucional • Seguro • Escalável</span>
+      </div>
+    </aside>
+
+    <!-- LOGIN FORM -->
+    <section class="login-content">
+
+      <div class="login-brand">
+        <img src="/jswater-logo.svg" alt="JsWater" class="side-logo" />
+        <h2 class="side-title">{{ titlelogo }}</h2>
+      </div>
+
+      <header class="login-header">
+        <h1>{{ title }}</h1>
+        <p>Introduza as suas credenciais</p>
+      </header>
+
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="submitted.emit()"
+        class="login-form"
+      >
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nome de utilizador</mat-label>
+          <input matInput formControlName="username" />
+          <mat-icon matPrefix>person</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Palavra-passe</mat-label>
+          <input
+            matInput
+            [type]="hidePassword ? 'password' : 'text'"
+            formControlName="password"
+          />
+          <mat-icon matPrefix>lock</mat-icon>
+        </mat-form-field>
+
+        <button
+          mat-flat-button
+          color="primary"
+          class="login-button"
+          type="submit"
+          [disabled]="loginForm.invalid || isLoading"
+        >
+          Entrar no Sistema
+        </button>
+      </form>
+
+      @if (errorMessage) {
+        <div class="login-error">
+          {{ errorMessage }}
+        </div>
+      }
+
+      <footer class="login-footer">
+        © 2026 JsWater · Moçambique
+      </footer>
+
+    </section>
+
+  </mat-card>
+
+</section>

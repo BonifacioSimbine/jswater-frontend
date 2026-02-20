@@ -1,0 +1,11 @@
+<app-default-login-layout
+	title="Portal do Operador"
+	titlelogo="JsWater"
+	primaryBtnText="Aceder ao sistema"
+	[loginForm]="loginForm"
+	[hidePassword]="hidePassword"
+	[isLoading]="isLoading"
+	[errorMessage]="errorMessage"
+	(submitted)="onSubmitted()"
+	(togglePasswordVisibility)="togglePassword()"
+></app-default-login-layout>

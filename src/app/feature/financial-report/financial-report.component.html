@@ -1,0 +1,76 @@
+
+<mat-card class="fin-report-card" style="padding: 32px 40px 24px 40px; max-width: 700px; margin: 40px auto; box-shadow: 0 2px 16px #0001;">
+  <div class="fin-report-header" style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px;">
+    <div>
+      <h1 style="margin: 0 0 4px 0; font-size: 2.2rem; font-weight: 700; letter-spacing: -1px;">Relatório Financeiro</h1>
+      <div style="color: #666; font-size: 1.1rem; margin-bottom: 8px;">Resumo consolidado das finanças do sistema</div>
+    </div>
+    <button mat-flat-button color="primary" (click)="exportCsv()" style="height:40px;align-self:flex-start; font-weight: 600;">
+      <mat-icon>download</mat-icon>
+      Baixar Relatório
+    </button>
+  </div>
+
+  <form [formGroup]="form" class="fin-report-filters" style="display: flex; gap: 16px; margin-bottom: 24px;">
+    <mat-form-field appearance="outline" style="flex: 1; min-width: 160px;">
+      <mat-label>Mês</mat-label>
+      <input matInput type="month" formControlName="month">
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="flex: 1; min-width: 120px;">
+      <mat-label>Zona</mat-label>
+      <input matInput formControlName="zone">
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="flex: 1; min-width: 120px;">
+      <mat-label>Cliente</mat-label>
+      <input matInput formControlName="clientName">
+    </mat-form-field>
+  </form>
+
+  <div *ngIf="report" style="margin-top: 16px;">
+    <table class="fin-report-table" style="width: 100%; border-collapse: collapse; background: #fafbfc; border-radius: 8px; overflow: hidden; margin-bottom: 28px;">
+      <thead>
+        <tr style="background: #f1f3f6;">
+          <th style="padding: 12px 8px; font-size: 1.08rem; font-weight: 600; text-align: left; border-bottom: 2px solid #e0e0e0;">Faturas Emitidas</th>
+          <th style="padding: 12px 8px; font-size: 1.08rem; font-weight: 600; text-align: left; border-bottom: 2px solid #e0e0e0;">Faturas Pagas</th>
+          <th style="padding: 12px 8px; font-size: 1.08rem; font-weight: 600; text-align: left; border-bottom: 2px solid #e0e0e0;">Faturas em Aberto</th>
+          <th style="padding: 12px 8px; font-size: 1.08rem; font-weight: 600; text-align: left; border-bottom: 2px solid #e0e0e0;">% Inadimplência</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding: 14px 8px; font-size: 1.2rem; font-weight: 500; color: #222;">{{ report.quantidadeFaturasEmitidas }}</td>
+          <td style="padding: 14px 8px; font-size: 1.2rem; font-weight: 500; color: #2e7d32;">{{ report.quantidadeFaturasPagas }}</td>
+          <td style="padding: 14px 8px; font-size: 1.2rem; font-weight: 500; color: #f9a825;">{{ report.quantidadeFaturasEmAberto }}</td>
+          <td style="padding: 14px 8px; font-size: 1.2rem; font-weight: 700; color: #c62828;">{{ report.inadimplenciaPercentual }}%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="fin-report-table" style="width: 100%; border-collapse: collapse; background: #f7fafd; border-radius: 8px; overflow: hidden;">
+      <thead>
+        <tr style="background: #f4f6f8;">
+          <th style="padding: 12px 8px; font-size: 1.08rem; font-weight: 600; text-align: left; border-bottom: 2px solid #e0e0e0;">Faturado</th>
+          <th style="padding: 12px 8px; font-size: 1.08rem; font-weight: 600; text-align: left; border-bottom: 2px solid #e0e0e0;">Recebido</th>
+          <th style="padding: 12px 8px; font-size: 1.08rem; font-weight: 600; text-align: left; border-bottom: 2px solid #e0e0e0;">Em Aberto</th>
+          <th style="padding: 12px 8px; font-size: 1.08rem; font-weight: 600; text-align: left; border-bottom: 2px solid #e0e0e0;">Multas</th>
+          <th style="padding: 12px 8px; font-size: 1.08rem; font-weight: 600; text-align: left; border-bottom: 2px solid #e0e0e0;">Total Despesas</th>
+          <th style="padding: 12px 8px; font-size: 1.08rem; font-weight: 600; text-align: left; border-bottom: 2px solid #e0e0e0;">Saldo Líquido</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding: 14px 8px; font-size: 1.1rem; font-weight: 500;">{{ report.totalFaturado | number:'1.2-2' }} MT</td>
+          <td style="padding: 14px 8px; font-size: 1.1rem; font-weight: 500;">{{ report.totalRecebido | number:'1.2-2' }} MT</td>
+          <td style="padding: 14px 8px; font-size: 1.1rem; font-weight: 500;">{{ report.totalEmAberto | number:'1.2-2' }} MT</td>
+          <td style="padding: 14px 8px; font-size: 1.1rem; font-weight: 500;">{{ report.totalMultas | number:'1.2-2' }} MT</td>
+          <td style="padding: 14px 8px; font-size: 1.1rem; font-weight: 500;">{{ report.totalDespesas | number:'1.2-2' }} MT</td>
+          <td style="padding: 14px 8px; font-size: 1.1rem; font-weight: 700;">{{ report.saldoLiquido | number:'1.2-2' }} MT</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top: 18px; color: #888; font-size: 0.98rem; text-align: right;">
+      Relatório gerado em {{ now | date:'dd/MM/yyyy HH:mm' }}
+    </div>
+  </div>
+</mat-card>

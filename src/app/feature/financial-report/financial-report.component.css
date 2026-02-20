@@ -1,0 +1,62 @@
+
+.fin-report-card {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px #0001;
+}
+.fin-report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+.fin-report-header h2 {
+  margin: 0 0 0.5rem 0;
+}
+.fin-report-desc {
+  color: #666;
+  font-size: 1rem;
+  margin: 0;
+}
+.fin-report-filters {
+  display: flex;
+  gap: 18px;
+  align-items: flex-end;
+}
+.fin-report-kpis {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.fin-kpi-card {
+  background: #f8fafc;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px #0001;
+  padding: 1.5rem 2rem;
+  min-width: 180px;
+  flex: 1 1 200px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.fin-kpi-label {
+  font-size: 1rem;
+  color: #888;
+  margin-bottom: 0.5rem;
+}
+.fin-kpi-value {
+  font-size: 2rem;
+  font-weight: bold;
+}
+.fin-kpi-value.faturado { color: #1976d2; }
+.fin-kpi-value.recebido { color: #388e3c; }
+.fin-kpi-value.aberto { color: #fbc02d; }
+.fin-kpi-value.multas { color: #d32f2f; }
+.fin-kpi-value.despesas { color: #6d4c41; }
+.fin-kpi-value.saldo { color: #512da8; }

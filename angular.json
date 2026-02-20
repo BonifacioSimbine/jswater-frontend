@@ -59,7 +59,8 @@
               "buildTarget": "waterUi:build:production"
             },
             "development": {
-              "buildTarget": "waterUi:build:development"
+              "buildTarget": "waterUi:build:development",
+              "port":4300
             }
           },
           "defaultConfiguration": "development"

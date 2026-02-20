@@ -1,0 +1,17 @@
+<div class="confirm-dialog">
+  <div class="confirm-icon">
+    <mat-icon>help_outline</mat-icon>
+  </div>
+  <div class="confirm-body">
+    <h2>{{ title }}</h2>
+    <p>{{ data.message }}</p>
+  </div>
+  <div class="confirm-actions">
+    <button mat-stroked-button type="button" (click)="onCancel()">
+      {{ cancelLabel }}
+    </button>
+    <button mat-flat-button color="warn" type="button" (click)="onConfirm()">
+      {{ confirmLabel }}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="invoice-preview-modal" style="padding: 2rem; min-width: 350px;">
+  <h2>Detalhes da Fatura</h2>
+  <div style="margin-bottom: 1rem;">
+    <strong>Cliente:</strong> {{ data.clientName }}<br>
+    <strong>Bairro:</strong> {{ data.bairro || '-' }}<br>
+    <strong>Período:</strong> {{ data.period }}<br>
+    <strong>Estado:</strong> <span [ngClass]="{'status-paid': data.status === 'PAID', 'status-pending': data.status !== 'PAID'}">{{ data.status === 'PAID' ? 'Pago' : 'Pendente' }}</span>
+  </div>
+  <div style="margin-bottom: 1rem;">
+    <strong>Leitura Anterior:</strong> {{ data.previousReading }}<br>
+    <strong>Leitura Atual:</strong> {{ data.currentReading }}<br>
+    <strong>Consumo:</strong> {{ data.consumption }}<br>
+    <strong>Tarifa:</strong> {{ data.tariffRate }}<br>
+    <strong>Multa:</strong> {{ data.fineAmount }}<br>
+  </div>
+  <div style="margin-bottom: 1rem;">
+    <strong>Valor da Fatura:</strong> {{ data.invoiceAmount }}<br>
+    <strong>Dívida Total:</strong> {{ data.totalDebt }}<br>
+    <strong>Valor a Pagar:</strong> {{ data.amountToPay }}<br>
+    <strong>Diferença:</strong> {{ data.difference }}<br>
+  </div>
+</div>

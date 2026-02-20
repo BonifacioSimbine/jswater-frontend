@@ -1,0 +1,38 @@
+/* --- Cores da Marca (Brand Colors) --- */
+/* Azul Oceano - Usado em botões primários, links e destaques */
+
+:root {
+	--primary-color: #2563EB;
+	/* Azul Profundo - hover e cabeçalhos */
+	--primary-hover: #1D4ED8;
+	/* Ciano Água - gradientes e detalhes secundários */
+	--secondary-color: #06B6D4;
+
+	/* --- Cores de Texto (Typography) --- */
+	/* Ardósia Escura - texto principal */
+	--text-color: #0F172A;
+	/* Ardósia Suave - legendas e textos de apoio */
+	--text-secondary: #64748B;
+	/* Branco Puro - texto sobre fundos escuros */
+	--text-inverse: #FFFFFF;
+
+	/* --- Fundos (Backgrounds) --- */
+	/* Fundo geral da aplicação */
+	--background-color: #F8FAFC;
+	/* Fundo de cartões (cards) e inputs */
+	--surface-color: #FFFFFF;
+
+	/* --- Cores de Estado (Status) --- */
+	--success-color: #22C55E; /* Verde para sucesso */
+	--warning-color: #F59E0B; /* Âmbar para avisos */
+	--error-color: #EF4444;   /* Vermelho para erros */
+
+	/* --- Gradientes e Efeitos --- */
+	/* Gradiente oficial da marca (Login e Headers) */
+	--brand-gradient: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+	/* Sombra suave para "flutuar" elementos (Floating Cards) */
+	--card-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.1), 0 4px 6px -2px rgba(37, 99, 235, 0.05);
+
+	/* --- Fontes --- */
+	--font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+}

@@ -1,0 +1,23 @@
+<div style="padding: 0.5rem 0.5rem 0 0.5rem; min-width: 340px; max-width: 400px;">
+  <h2 mat-dialog-title style="text-align:center; font-size: 1.6rem; font-weight: 700; color: #1976d2; margin-bottom: 1.2rem; letter-spacing: 0.5px;">Atribuir Multa</h2>
+  <form [formGroup]="form" (ngSubmit)="submit()" style="display: flex; flex-direction: column; gap: 1.1rem;">
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Valor da Multa (MT) *</mat-label>
+      <input matInput type="number" formControlName="amount" required min="1" autocomplete="off">
+      <mat-error *ngIf="form.get('amount')?.invalid">Valor obrigatório e maior que zero</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Período (yyyy-MM) *</mat-label>
+      <input matInput formControlName="period" required placeholder="2026-02" autocomplete="off">
+      <mat-error *ngIf="form.get('period')?.invalid">Período obrigatório</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Motivo (opcional)</mat-label>
+      <input matInput formControlName="reason" autocomplete="off">
+    </mat-form-field>
+    <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 0.5rem;">
+      <button mat-stroked-button color="warn" type="button" (click)="dialogRef.close()" style="min-width: 100px;">Cancelar</button>
+      <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid" style="min-width: 100px; font-weight: 600;">Atribuir</button>
+    </div>
+  </form>
+</div>

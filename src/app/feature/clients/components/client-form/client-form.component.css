@@ -1,0 +1,27 @@
+.form-content {
+  min-width: 400px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 20px;
+}
+
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.row {
+  display: flex;
+  gap: 16px;
+}
+
+.flex-grow {
+  flex: 1;
+}
+
+.full-width {
+  width: 100%;
+}

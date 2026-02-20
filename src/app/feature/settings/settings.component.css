@@ -1,0 +1,93 @@
+.page-root {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+}
+
+.page-card {
+  width: 100%;
+  max-width: 900px;
+  min-height: 500px;
+}
+
+.tab-content {
+  padding: 24px 0;
+}
+
+.narrow-tab {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+@media (max-width: 768px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.helper-text {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 24px;
+}
+
+/* System Info Styles */
+.system-info .logo-area {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.system-info h2 {
+  margin: 16px 0 8px;
+  color: #333;
+}
+
+.active-badge {
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: bold;
+  border: 1px solid #c8e6c9;
+  margin-right: 8px; /* Spacing between badge and button */
+}
+
+.inactive-text {
+  color: #757575;
+  font-size: 12px;
+  font-style: italic;
+}
+
+.meta-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Feedback Messages */
+.msg {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.msg.success {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #c8e6c9;
+}
+
+.msg.error {
+  background: #ffebee;
+  color: #c62828;
+  border: 1px solid #ffcdd2;
+}
