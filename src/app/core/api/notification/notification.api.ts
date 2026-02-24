@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { PageResponse } from '../../models/common/page-response.model';
 import { NotificationResponse } from '../../models/notification';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NotificationApi {
   private http = inject(HttpClient);
-  private readonly apiUrl = '/api/notifications';
+  // apiUrl removido, agora usa environment.apiUrl
 
   list(params?: {
     status?: string;
@@ -16,7 +17,7 @@ export class NotificationApi {
     page?: number;
     size?: number;
   }) {
-    return this.http.get<PageResponse<NotificationResponse>>(this.apiUrl, {
+    return this.http.get<PageResponse<NotificationResponse>>(`${environment.apiUrl}/notifications`, {
       params: {
         status: params?.status ?? '',
         category: params?.category ?? '',
@@ -27,14 +28,14 @@ export class NotificationApi {
   }
 
   getUnreadCount() {
-    return this.http.get<number>(`${this.apiUrl}/unread-count`);
+    return this.http.get<number>(`${environment.apiUrl}/notifications/unread-count`);
   }
 
   markAsRead(id: string) {
-    return this.http.post<void>(`${this.apiUrl}/${id}/read`, null);
+    return this.http.post<void>(`${environment.apiUrl}/notifications/${id}/read`, null);
   }
 
   markAllAsRead() {
-    return this.http.post<void>(`${this.apiUrl}/read-all`, null);
+    return this.http.post<void>(`${environment.apiUrl}/notifications/read-all`, null);
   }
 }

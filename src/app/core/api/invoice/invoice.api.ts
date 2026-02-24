@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 import { 
   InvoiceResponse, 
   GenerateInvoiceRequest,
@@ -20,17 +21,17 @@ export class InvoiceApi {
       if (options.clientName) params = params.set('clientName', options.clientName);
       if (options.page != null) params = params.set('page', options.page.toString());
       if (options.size != null) params = params.set('size', options.size.toString());
-      return this.http.get<PageResponse<any>>(`${this.apiUrl}/reports/billing-detail`, { params });
+        return this.http.get<PageResponse<any>>(`${environment.apiUrl}/invoices/reports/billing-detail`, { params });
     }
   private http = inject(HttpClient);
-  private readonly apiUrl = '/api/invoices';
+      // apiUrl removido, agora usa environment.apiUrl
 
   register(body: GenerateInvoiceRequest) {
-    return this.http.post<InvoiceResponse>(`${this.apiUrl}/register`, body);
+    return this.http.post<InvoiceResponse>(`${environment.apiUrl}/invoices/register`, body);
   }
 
   getById(id: string) {
-    return this.http.get<InvoiceResponse>(`${this.apiUrl}/${id}`);
+    return this.http.get<InvoiceResponse>(`${environment.apiUrl}/invoices/${id}`);
   }
 
   /**
@@ -38,7 +39,7 @@ export class InvoiceApi {
    * Returns a plain list (not paginated in this endpoint version).
    */
   listAll() {
-    return this.http.get<InvoiceResponse[]>(`${this.apiUrl}`);
+    return this.http.get<InvoiceResponse[]>(`${environment.apiUrl}/invoices`);
   }
 
   /**
@@ -52,12 +53,12 @@ export class InvoiceApi {
     if (options.page != null) params = params.set('page', options.page.toString());
     if (options.size != null) params = params.set('size', options.size.toString());
     
-    return this.http.get<PageResponse<InvoiceResponse>>(`${this.apiUrl}/statement`, { params });
+    return this.http.get<PageResponse<InvoiceResponse>>(`${environment.apiUrl}/invoices/statement`, { params });
   }
 
   getClientDebt(clientId: string) {
     const params = new HttpParams().set('clientId', clientId);
-    return this.http.get<ClientDebtSummaryResponse>(`${this.apiUrl}/debt`, { params });
+    return this.http.get<ClientDebtSummaryResponse>(`${environment.apiUrl}/invoices/debt`, { params });
   }
 
   getClientPendingInvoices(options: { clientId: string; overdueOnly?: boolean; page?: number; size?: number }) {
@@ -65,29 +66,29 @@ export class InvoiceApi {
     if (options.overdueOnly != null) params = params.set('overdueOnly', String(options.overdueOnly));
     if (options.page != null) params = params.set('page', options.page.toString());
     if (options.size != null) params = params.set('size', options.size.toString());
-    return this.http.get<PageResponse<InvoiceResponse>>(`${this.apiUrl}/pending`, { params });
+    return this.http.get<PageResponse<InvoiceResponse>>(`${environment.apiUrl}/invoices/pending`, { params });
   }
 
   pay(id: string) {
-    return this.http.post<InvoiceResponse>(`${this.apiUrl}/${id}/pay`, null);
+    return this.http.post<InvoiceResponse>(`${environment.apiUrl}/invoices/${id}/pay`, null);
   }
 
   getMonthlyReport(month: string) {
     const params = new HttpParams().set('month', month);
-    return this.http.get<MonthlyBillingReportResponse>(`${this.apiUrl}/reports/monthly`, { params });
+    return this.http.get<MonthlyBillingReportResponse>(`${environment.apiUrl}/invoices/reports/monthly`, { params });
   }
 
   getTopDebtors(limit: number = 10) {
     const params = new HttpParams().set('limit', limit.toString());
-    return this.http.get<TopDebtorResponse[]>(`${this.apiUrl}/reports/top-debtors`, { params });
+    return this.http.get<TopDebtorResponse[]>(`${environment.apiUrl}/invoices/reports/top-debtors`, { params });
   }
 
   getZoneDebt() {
-    return this.http.get<ZoneDebtResponse[]>(`${this.apiUrl}/reports/zone-debt`);
+    return this.http.get<ZoneDebtResponse[]>(`${environment.apiUrl}/invoices/reports/zone-debt`);
   }
 
   getZoneDebtByMonth(month: string) {
     const params = new HttpParams().set('month', month);
-    return this.http.get<ZoneDebtResponse[]>(`${this.apiUrl}/reports/zone-debt/monthly`, { params });
+    return this.http.get<ZoneDebtResponse[]>(`${environment.apiUrl}/invoices/reports/zone-debt/monthly`, { params });
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ExpensesApiService {
@@ -14,10 +15,10 @@ export class ExpensesApiService {
       if (params.size !== undefined) q.push(`size=${params.size}`);
       query = '?' + q.join('&');
     }
-    return this.http.get<any[]>(`/api/expenses${query}`);
+    return this.http.get<any[]>(`${environment.apiUrl}/expenses${query}`);
   }
 
   registerExpense(expense: any): Observable<any> {
-    return this.http.post<any>('/api/expenses', expense);
+    return this.http.post<any>(`${environment.apiUrl}/expenses`, expense);
   }
 }

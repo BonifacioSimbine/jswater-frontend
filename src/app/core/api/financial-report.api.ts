@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class FinancialReportApiService {
@@ -10,6 +11,6 @@ export class FinancialReportApiService {
     let params: any = { month };
     if (zone) params.zone = zone;
     if (clientName) params.clientName = clientName;
-    return this.http.get<any>('/api/invoices/reports/financial', { params });
+    return this.http.get<any>(`${environment.apiUrl}/invoices/reports/financial`, { params });
   }
 }

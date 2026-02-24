@@ -1,6 +1,56 @@
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
 @import "./styles/variables.css";
 
+/* Responsividade Global */
+@media (max-width: 600px) {
+    .page-root, .shell-content {
+        padding: 8px !important;
+    }
+    .page-card {
+        padding: 12px !important;
+        border-radius: 8px !important;
+    }
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .kpi-grid, .tables-grid, .content-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+    .form-container, .app-form {
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+    .data-table, .simple-table {
+        font-size: 0.95rem;
+        overflow-x: auto;
+        display: block;
+    }
+    .status-pill-success, .status-pill-warning, .status-pill-neutral, .status-pill-error {
+        font-size: 0.7rem;
+        padding: 2px 8px;
+    }
+    .alert {
+        font-size: 0.85rem;
+        padding: 8px 10px;
+    }
+    h1, h2, h3 {
+        font-size: 1.2rem !important;
+    }
+    button, .mat-button, .mat-raised-button {
+        font-size: 1rem !important;
+        min-height: 36px !important;
+    }
+}
+
 /* Reset & Base */
 * { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; padding: 0; }

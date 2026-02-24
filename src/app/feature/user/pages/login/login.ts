@@ -40,14 +40,15 @@ export class Login {
       .login({ username, password })
       .subscribe({
         next: (res) => {
-          // Corrigir: mapear username para name se necessário, sem erro TS2339
+          console.log('[Login] Login response:', res);
           const name = res.name || (res as any).username;
           this.authService.setUser({ name, role: res.role, token: res.token });
+          console.log('[Login] Após setUser, localStorage:', localStorage.getItem('auth_token'));
           this.router.navigate(['/app']);
           this.isLoading = false;
         },
         error: (err) => {
-          console.error('Erro no login', err);
+          console.error('[Login] Erro no login', err);
           if (err.status === 401 || err.status === 403) {
             this.errorMessage = 'Credenciais inválidas.';
           } else {

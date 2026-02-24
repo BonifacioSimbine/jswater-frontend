@@ -65,27 +65,25 @@ export class ClientFormComponent {
       localidade: client.localidade,
       rua: client.rua,
       referencia: client.referencia,
-      // Attempt to handle document if separated, otherwise logic might be needed
-      // For now we assume we can't easily split 'document' back into specific type/number,
-      // or we just default type.
+     
       documentNumber: client.document, 
     });
     
-    // Disable document fields in edit mode
+    
     this.form.controls.documentType.disable();
     this.form.controls.documentNumber.disable();
   }
 
   save() {
     const user = this.authService.getUser();
-    if (!user || user.role !== 'admin') {
+    if (!user || typeof user.role !== 'string' || user.role.toLowerCase() !== 'admin') {
       this.snackBar.open('Você não tem permissão para realizar esta operação.', 'Fechar', { duration: 4000 });
       return;
     }
     if (this.form.invalid) return;
 
     this.isSaving = true;
-    const formValue = this.form.value; // getRawValue() if we needed disabled fields, but we don't send them on update usually
+    const formValue = this.form.value;
 
     let finalRua = formValue.rua || '';
     if (formValue.numeroCasa) {
