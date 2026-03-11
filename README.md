@@ -1,59 +1,57 @@
 # WaterUi
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.2.
+WaterUI – Frontend
 
-## Development server
+WaterUI é a interface web do sistema JSWater, uma plataforma desenvolvida para gestão de serviços relacionados à água, permitindo interação eficiente entre utilizadores e o sistema através de uma interface moderna e responsiva.
 
-To start a local development server, run:
+O frontend foi desenvolvido com foco em performance, escalabilidade e boa experiência do utilizador, utilizando tecnologias modernas do ecossistema JavaScript.
 
-```bash
-ng serve
-```
+Tecnologias Utilizadas
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+JavaScript / TypeScript
 
-## Code scaffolding
+Angular
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+HTML5
 
-```bash
-ng generate component component-name
-```
+CSS3
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+TailwindCSS
 
-```bash
-ng generate --help
-```
+REST API
 
-## Building
+Estas tecnologias permitem criar uma aplicação modular, rápida e fácil de manter.
 
-To build the project run:
 
-```bash
-ng build
-```
+Integração com Backend
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+O frontend comunica com a API do sistema JSWater através de requisições REST.
 
-## Running unit tests
+Certifique-se de que o backend esteja em execução e que o arquivo de ambiente (environment.ts) esteja configurado com a URL correta da API.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
 
-```bash
-ng test
-```
+Funcionalidades
 
-## Running end-to-end tests
+Interface moderna e responsiva
 
-For end-to-end (e2e) testing, run:
+Consumo de API REST
 
-```bash
-ng e2e
-```
+Componentes reutilizáveis
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Estrutura modular
 
-## Additional Resources
+Preparado para escalabilidade
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Boas Práticas
+
+O projecto segue boas práticas de desenvolvimento como:
+
+Separação de responsabilidades
+
+Componentização
+
+Organização modular
+
+Código reutilizável
+
+Integração com API via services
